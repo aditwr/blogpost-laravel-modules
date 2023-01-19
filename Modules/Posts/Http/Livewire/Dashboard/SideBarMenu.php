@@ -8,6 +8,10 @@ class SideBarMenu extends Component
 {
     public $menuActive = 'home';
 
+    protected $listeners = [
+        'dashboardActiveMenuChangedForNav'=>'handleMenuChange'
+    ];
+
     public function handleMenuChange($menu){
         $this->menuActive = $menu;
 

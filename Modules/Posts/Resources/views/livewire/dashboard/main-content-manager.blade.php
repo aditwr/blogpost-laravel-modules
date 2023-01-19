@@ -1,4 +1,4 @@
-<div>
+<div class="">
     @switch($menuActive)
         @case('home')
             @livewire('posts::dashboard.main-content.home')

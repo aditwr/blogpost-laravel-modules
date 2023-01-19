@@ -17,7 +17,7 @@ Route::prefix('posts')->name('posts.')->group(function() {
 });
 
 Route::prefix('dashboard')->group(function(){
-    Route::get('/posts', function(){
+    Route::get('/', function(){
         return view('posts::dashboard');
     });
 });

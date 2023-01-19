@@ -11,6 +11,7 @@ class ShowAllPosts extends Component
     use WithPagination;
 
     protected $posts;
+    protected $paginationTheme = 'bootstrap';
 
     public function getDataPosts(){
         $posts = Post::latest();
@@ -21,10 +22,19 @@ class ShowAllPosts extends Component
     public function mount(){
         $this->posts = Post::latest()->paginate(3);
     }
+
+    public function destroy($id){
+        $post = Post::find($id);
+        $post->delete();
+
+        $this->emit('showNotification', "Post '$post->title' has been successfully deleted!");
+    }
+
     public function render()
     {
-        // $posts = $this->getDataPosts();
-        // $this->posts = $posts->paginate(3);
-        return view('posts::livewire.dashboard.show-all-posts');
+        $posts = $this->getDataPosts()->paginate(5);
+        return view('posts::livewire.dashboard.show-all-posts', [
+            'posts' => $posts,
+        ]);
     }
 }

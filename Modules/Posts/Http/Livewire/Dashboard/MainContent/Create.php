@@ -19,7 +19,7 @@ class Create extends Component
         'title'=>['required','min:2', 'max:100'],
         'slug' => ['required', 'unique:posts,slug'],
         'content' => ['required', 'min:10'],
-        'categoryId' => ['required']
+        'categoryId' => ['required'],
     ];
 
     public function store(){
@@ -33,7 +33,9 @@ class Create extends Component
             'category_id' => $this->categoryId,
         ]);
 
-        $this->emit('showNotification', "Post '$post->title' created successfully!");
+        // $this->emit('showNotification', "Post '$post->title' created successfully!");
+        // $this->emit('dashboardActiveMenuChanged', 'show-all');
+        $this->emit('dashboardActiveMenuChangedForNav', 'show-all');
     }
 
     public function updated($component, $value){

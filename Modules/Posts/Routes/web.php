@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('posts')->group(function() {
+Route::prefix('posts')->name('posts.')->group(function() {
     Route::get('/', 'PostsController@index');
+    Route::get('/{post:slug}', 'PostsController@show');
+});
+
+Route::prefix('dashboard')->group(function(){
+    Route::get('/posts', function(){
+        return view('posts::dashboard');
+    });
 });

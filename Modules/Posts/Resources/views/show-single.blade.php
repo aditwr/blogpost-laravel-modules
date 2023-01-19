@@ -1,3 +1,5 @@
+@extends('posts::layouts.master')
+
 <head>
     <style>
         .bd-placeholder-img {
@@ -124,24 +126,14 @@
     </style>
 </head>
 
-<div class="container">
-    {{-- blog header --}}
-    @livewire('posts::small-components.blog-header')
+@section('content')
+   <div class="">
+        <main class="container">
+            @livewire('posts::small-components.category-header')
 
-    {{-- category header --}}
-    @livewire('posts::small-components.category-header')
-</div>
+            {{-- parent show post page --}}
+            @livewire('posts::show', ['post'=>$post])
+        </main>
+   </div>
+@endsection
 
-  <main class="container">
-        {{-- highlight posts --}}
-        @livewire('posts::small-components.highlight-post', ['posts'=> $this->posts])
-
-    <div class="row g-5">
-        {{-- list of posts --}}
-        @livewire('posts::show-post')
-
-        {{-- sidebar --}}
-        @livewire('posts::small-components.sidebar')
-    </div>
-
-  </main>

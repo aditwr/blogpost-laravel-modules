@@ -2,9 +2,10 @@
 
 namespace Modules\Posts\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Modules\Posts\Entities\Post;
 use Illuminate\Routing\Controller;
+use Illuminate\Contracts\Support\Renderable;
 
 class PostsController extends Controller
 {
@@ -15,6 +16,11 @@ class PostsController extends Controller
     public function index()
     {
         return view('posts::index');
+    }
+
+    public function list(){
+        return "list di eksekusi";
+        // return view("posts::show-all");
     }
 
     /**
@@ -41,9 +47,10 @@ class PostsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        return view('posts::show');
+        $post->load('category');
+        return view('posts::show-single', ['post'=>$post]);
     }
 
     /**

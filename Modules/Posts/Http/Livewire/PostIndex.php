@@ -20,7 +20,7 @@ class PostIndex extends Component
     }
 
     public function getDataPosts(){
-        $posts = Post::latest();
+        $posts = Post::latest()->limit(5);
         return $posts->with('category')->paginate(3);
     }
     public function render()

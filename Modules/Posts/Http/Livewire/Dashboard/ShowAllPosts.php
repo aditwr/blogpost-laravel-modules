@@ -28,6 +28,12 @@ class ShowAllPosts extends Component
         $post->delete();
 
         $this->emit('showNotification', "Post '$post->title' has been successfully deleted!");
+        $this->emit('dashboardActiveMenuChangedForNav', 'show-all');
+    }
+
+    public function update($post){
+        // tell MainContentManager Components, to render and show update form
+        $this->emit('dashboardActiveMenuEdit', ['update', $post]);
     }
 
     public function render()

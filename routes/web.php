@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LoginController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,10 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
+})->middleware('guest');
+
+Route::middleware('guest')->controller(LoginController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/signout', [LoginController::class, 'signout'])->middleware('auth');

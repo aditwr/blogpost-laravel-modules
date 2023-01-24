@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->middleware('guest');
+
+Route::middleware('guest')->controller(LoginController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
 });
+
+Route::get('/signout', [LoginController::class, 'signout'])->middleware('auth');

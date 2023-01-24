@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -11,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('posts')->name('posts.')->group(function() {
+Route::prefix('posts')->name('posts.')->group(function () {
     Route::get('/', 'PostsController@index');
     Route::get('/{post:slug}', 'PostsController@show');
 });
 
-Route::prefix('dashboard')->group(function(){
-    Route::get('/', function(){
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
+    Route::get('/', function () {
         return view('posts::dashboard');
-    });
+    })->name('home');
 });
